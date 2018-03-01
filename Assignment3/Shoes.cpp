@@ -8,6 +8,11 @@ Shoes::Shoes() :
 {
 }
 
+Shoes::Shoes(std::string color)
+	: mColor(color)
+{
+}
+
 
 Shoes::~Shoes()
 {

@@ -7,6 +7,11 @@ Belt::Belt()
 {
 }
 
+Belt::Belt(int size)
+	: mSize(size)
+{
+}
+
 
 Belt::~Belt()
 {

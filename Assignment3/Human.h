@@ -8,6 +8,7 @@ class Human
 {
 public:
 	Human();
+	Human(std::string name, int beltSize, std::string shoeColor);
 	~Human();
 	const Belt& GetBelt();
 	void SetBelt(Belt& belt);

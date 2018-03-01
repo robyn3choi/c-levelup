@@ -7,6 +7,7 @@ class Shoes
 {
 public:
 	Shoes();
+	Shoes(std::string color);
 	~Shoes();
 	const std::string& GetColor();
 	void SetColor(std::string& color);

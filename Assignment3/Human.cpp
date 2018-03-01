@@ -6,6 +6,11 @@ Human::Human()
 {
 }
 
+Human::Human(std::string name, int beltSize, std::string shoeColor)
+	: mName(name), mBelt(beltSize), mShoes(shoeColor)
+{
+}
+
 
 Human::~Human()
 {
