@@ -11,8 +11,9 @@ namespace Storage
 
 		List(const List& other);
 		List(List&& other);
-		List<T>& operator=(const List& rhs);
-		List<T>& operator=(const List&& rhs);
+
+		List<T>& operator=(const List<T>& rhs);
+		List<T>& operator=(const List<T>&& rhs);
 
 		unsigned int Count() const { return mCount; }
 
@@ -24,6 +25,7 @@ namespace Storage
 		void Clear();
 
 		T& operator[](int index);
+		const T& operator[](int index) const;
 
 	private:
 		template<class T>

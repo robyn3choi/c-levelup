@@ -1,4 +1,3 @@
-#include "List.h"
 #include <iostream>
 namespace Storage
 {
@@ -52,7 +51,7 @@ namespace Storage
 	// ----------------------------------------------------------------------------------------------------
 
 	template<class T>
-	inline List<T> & List<T>::operator=(const List & rhs)
+	List<T> & List<T>::operator=(const List<T> & rhs)
 	{
 		if (this != &rhs)
 		{
@@ -70,7 +69,7 @@ namespace Storage
 	// ----------------------------------------------------------------------------------------------------
 
 	template<class T>
-	inline List<T>& List<T>::operator=(const List && rhs)
+	inline List<T>& List<T>::operator=(const List<T> && rhs)
 	{
 		if (this != &rhs)
 		{
@@ -209,6 +208,19 @@ namespace Storage
 
 		return pCurrent->Item;
 	}
+
+	template<class T>
+	const T& List<T>::operator[](int index) const
+	{
+		Node<T>* pCurrent = pHead;
+		for (int i = 0; i < index; ++i)
+		{
+			pCurrent = pCurrent->pNext;
+		}
+
+		return pCurrent->Item;
+	}
+
 
 	// ----------------------------------------------------------------------------------------------------
 
