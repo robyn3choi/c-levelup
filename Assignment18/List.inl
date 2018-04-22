@@ -1,4 +1,5 @@
 #include <iostream>
+#include "List.h"
 namespace Storage
 {
 	template<class T>
@@ -29,10 +30,15 @@ namespace Storage
 	template<class T>
 	inline List<T>::List(const List & other)
 	{
-		mCount = other.mCount;
-		for (int i = 0; i < mCount; ++i)
+		CreateNode(nullptr, other.pHead->Item);
+		Node<T>* curr = pHead;
+
+		unsigned int counter = 1;
+		while (counter < other.mCount)
 		{
-			CreateNode(other[i].pNext, other[i].Item);
+			CreateNode(curr, other[counter]);
+			curr = curr->pNext;
+			counter++;
 		}
 	}
 
@@ -56,10 +62,15 @@ namespace Storage
 		if (this != &rhs)
 		{
 			Clear();
-			mCount = rhs.mCount;
-			for (int i = 0; i < mCount; ++i)
+			CreateNode(nullptr, other.pHead->Item);
+			Node<T>* curr = pHead;
+
+			unsigned int counter = 1;
+			while (counter < other.mCount)
 			{
-				CreateNode(rhs[i].pNext, rhs[i].Item);
+				CreateNode(curr, other[counter]);
+				curr = curr->pNext;
+				counter++;
 			}
 		}
 
@@ -198,18 +209,6 @@ namespace Storage
 	// ----------------------------------------------------------------------------------------------------
 
 	template<class T>
-	T& List<T>::operator[](int index)
-	{
-		Node<T>* pCurrent = pHead;
-		for (int i = 0; i < index; ++i)
-		{
-			pCurrent = pCurrent->pNext;
-		}
-
-		return pCurrent->Item;
-	}
-
-	template<class T>
 	const T& List<T>::operator[](int index) const
 	{
 		Node<T>* pCurrent = pHead;
@@ -221,13 +220,25 @@ namespace Storage
 		return pCurrent->Item;
 	}
 
+	//template<class T>
+	//const T& List<T>::operator[](int index) const
+	//{
+	//	Node<T>* pCurrent = pHead;
+	//	for (int i = 0; i < index; ++i)
+	//	{
+	//		pCurrent = pCurrent->pNext;
+	//	}
+
+	//	return pCurrent->Item;
+	//}
+
 
 	// ----------------------------------------------------------------------------------------------------
 
 	template<class T>
-	void List<T>::CreateNode(Node<T>* pEnd, const T& item)
+	void List<T>::CreateNode(Node<T>* pEnd, T item)
 	{
-		Node<T>* pNewNode = new Node<T>(item, nullptr);
+		Node<T>* pNewNode = new Node<T>(std::move(item), nullptr);
 
 		if (pEnd != nullptr)
 		{

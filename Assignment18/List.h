@@ -24,7 +24,7 @@ namespace Storage
 		void RemoveAt(int index);
 		void Clear();
 
-		T& operator[](int index);
+		//T& operator[](int index);
 		const T& operator[](int index) const;
 
 	private:
@@ -32,14 +32,8 @@ namespace Storage
 		class Node
 		{
 		public:
-			Node(const T& item, Node* next)
-				: Item(item)
-				, pNext(next)
-			{
-				// Empty
-			}
-			Node(T&& item, Node* next)
-				: Item(item)
+			Node(T item, Node* next)
+				: Item(std::move(item))
 				, pNext(next)
 			{
 				// Empty
@@ -52,7 +46,9 @@ namespace Storage
 		Node<T>* pHead;
 		unsigned int mCount;
 
-		void CreateNode(Node<T>* pEnd, const T& item);
+		// should this have the const ref and rvalue overloads instead?
+		void CreateNode(Node<T>* pEnd, T item);
+		//void CreateNode(Node<T>* pEnd, const T& item);
 		void RemoveNode(Node<T>* pNode, Node<T>* pPrevious);
 	};
 }
